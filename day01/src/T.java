@@ -9,5 +9,14 @@ public class T {
     public static void main(String[] args) {
         //这个是java的窗口类
         TankFrame tankFrame = new TankFrame();
+        while (true) {
+            try {
+                Thread.sleep(100);
+                tankFrame.repaint();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

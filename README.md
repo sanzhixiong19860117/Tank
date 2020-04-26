@@ -165,3 +165,95 @@ public class TankFrame extends Frame {
 }
 ```
 
+### 按一键让其运动起来
+
+1.监听键盘事件
+
+```java
+this.addKeyListener(new MyKeyListener());
+```
+
+2.定义一个内部类
+
+```java
+//键盘监听处理类
+    class MyKeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            //按钮下
+            System.out.println("keyPressed");
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            //被弹起来操作
+            System.out.println("keyReleased");
+        }
+    }
+```
+
+重写了KayAdapter的两个方法，一个是按钮，一个是抬起。
+
+正常操作按下，可以运动按下以后然后x重新赋值
+
+```java
+@Override
+        public void keyPressed(KeyEvent e) {
+            //按钮下
+            System.out.println("keyPressed");
+            x += 200;
+        }
+```
+
+这样就可以让每次点击一下就可以，但是我们发现并不是每次点击就会运动，因为没有更新当前界面造成，然后我们调用repaint的方法进行界面的更新操作。
+
+代码如下：
+
+```java
+@Override
+        public void keyPressed(KeyEvent e) {
+            //按钮下
+            System.out.println("keyPressed");
+            x += 200;
+            repaint();
+        }
+```
+
+马上运行可以看到现在可以正常的操作了。
+
+问题：如果是没有按的其他的东西要运动怎么办？
+
+答：使用while（true）进行刷新，这个就类似于cocos里面的帧率刷新操作。
+
+我们在T这个类中怎么while（ture）操作
+
+```java
+public static void main(String[] args) {
+        //这个是java的窗口类
+        TankFrame tankFrame = new TankFrame();
+        while (true) {
+            try {
+                Thread.sleep(100);
+                tankFrame.repaint();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+```
+
+1.while(true)进行死循环，然后在Thread.sleep这个是每个100毫秒让当前线程停止一下，然后在调用repaint()这个方法重新绘制地图，在TankFrame类中的paint方法中修改x和y进行运动
+
+```java
+@Override
+    public void paint(Graphics graphics) {
+        System.out.println("paint");
+        graphics.fillRect(x, y, 50, 50);
+        //运动就是x或者y的数值进行赋值
+        x += 10;
+        y += 10;
+    }
+```
+
+这样我们就可以看到对应的运动效果。这个是最基本的java gui的基本运动效果操作
