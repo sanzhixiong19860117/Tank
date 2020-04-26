@@ -1,9 +1,3 @@
-# Tank
-## 第一天学习
-
-### new出一个窗口
-
-```java
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -30,16 +24,3 @@ public class T {
         });
     }
 }
-```
-
-核心知识点：
-
-使用Frame窗口类的基础使用，显示，title标签的修改，大小的修改，是否可以修改大小，以及关闭按钮的事件操作，详情请查看aip的操作。
-
-### TankFrame从Frame继承
-
-
-
-
-
-### 从写paint方法
