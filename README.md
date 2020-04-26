@@ -256,4 +256,32 @@ public static void main(String[] args) {
     }
 ```
 
-这样我们就可以看到对应的运动效果。这个是最基本的java gui的基本运动效果操作
+这样我们就可以看到对应的运动效果。这个是最基本的java gui的基本运动效果操作。
+
+### 键盘的数值
+
+控制是获得对应的数据
+
+带入如下
+
+```java
+int key = e.getKeyCode();//使用code或者对应的数据
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+                default:
+                    break;
+            }
+```
+
+key是从系统的事件，获得当前按的数据，在根据key对应的常量数据，为左的话x减去一个固定的数值，为右的时候则是x加上某一个固定的数值，上下各一种

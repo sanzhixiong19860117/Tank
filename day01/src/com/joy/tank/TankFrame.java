@@ -36,25 +36,63 @@ public class TankFrame extends Frame {
     //窗口重新绘制的时候操作
     @Override
     public void paint(Graphics graphics) {
-        System.out.println("paint");
         graphics.fillRect(x, y, 50, 50);
         //运动就是x或者y的数值进行赋值
-        x += 10;
-        y += 10;
+//        x += 10;
+//        y += 10;
     }
 
     //键盘监听处理类
     class MyKeyListener extends KeyAdapter {
+        //思路
+        /**
+         * 先确定方向，然后在这个方向状态，在处理对应的移动
+         */
+        boolean bL = false;
+        boolean bU = false;
+        boolean bR = false;
+        boolean bD = false;
         @Override
         public void keyPressed(KeyEvent e) {
-            //按钮下
-            System.out.println("keyPressed");
+            int key = e.getKeyCode();//使用code或者对应的数据
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            //被弹起来操作
-            System.out.println("keyReleased");
+            int key = e.getKeyCode();//使用code或者对应的数据
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
