@@ -331,6 +331,44 @@ case KeyEvent.VK_CONTROL://按下ctrl下操作开火
     }
 ```
 
+## 7.删除越界的子弹
+
+思路：根据屏幕的尺寸判断子弹的移动x和y的坐标，根据坐标进行list的删除操作。
+
+1.增加存活表示
+
+子弹消亡两种方式，一种是子弹越界，一种是碰到地方坦克，这里是越界的操作。
+
+```java
+private boolean live = true;//是否存在
+```
+
+2.在move方法里面增加越界的操作
+
+```java
+private void move() {
+        //判断移动出边界死亡操作
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
+            live = false;//一旦越界就死亡
+        }
+    }
+```
+
+3.根据死亡判断是否移除对象
+
+```java
+public void paint(Graphics graphics) {
+    //根据live数值，判断是否删除数组里面的数据
+        if (!live) {
+            this.tf.bullets.remove(this);
+        }
+        Color c = graphics.getColor();
+        graphics.setColor(Color.RED);
+        graphics.fillOval(x, y, Width, Height);
+        this.move();
+    }
+```
+
 
 
 ## 

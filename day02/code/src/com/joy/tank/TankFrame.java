@@ -16,7 +16,7 @@ import java.util.List;
 public class TankFrame extends Frame {
 
     //tank类
-    private Tank myTank = new Tank(200, 200, Dir.DOWN,this);
+    private Tank myTank = new Tank(200, 200, Dir.DOWN, this);
 
     //子弹列表
     List<Bullet> bullets = new ArrayList<>();
@@ -24,8 +24,8 @@ public class TankFrame extends Frame {
 //    public Bullet tankBullet = new Bullet(300, 300, Dir.DOWN);
 
     //宽度高度的常量
-    private static final int GAME_WIDTH = 800;
-    private static final int GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 800;
+    public static final int GAME_HEIGHT = 600;
 
     public TankFrame() {
         setVisible(true);                 //是否显示
@@ -63,10 +63,13 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics graphics) {
         myTank.paint(graphics);
-
+        Color c = graphics.getColor();
+        graphics.drawString("子弹的数量" + bullets.size(), 10, 60);
+        graphics.setColor(Color.black);
+        graphics.setColor(c);
         //循环出所有的子弹
-        for (Bullet b:bullets){
-            b.paint(graphics);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(graphics);
         }
     }
 
