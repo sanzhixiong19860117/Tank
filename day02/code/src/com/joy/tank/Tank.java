@@ -14,6 +14,8 @@ public class Tank {
     private static final int speed = 10;//速度
     //初始化方向
     private Dir dir = Dir.DOWN;
+    private boolean moving = false;
+
 
     public Tank(int x, int y, Dir dir) {
         this.x = x;
@@ -21,8 +23,13 @@ public class Tank {
         this.dir = dir;
     }
 
-    public void paint(Graphics graphics){
+    public void paint(Graphics graphics) {
         graphics.fillRect(x, y, 50, 50);
+        this.move();
+    }
+
+    private void move() {
+        if (!this.moving) return;
         //进行移动
         switch (dir) {
             case LEFT:
@@ -62,5 +69,13 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+    }
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 }

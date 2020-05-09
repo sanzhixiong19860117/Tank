@@ -135,7 +135,55 @@ private void setMainTankDir() {
         }
 ```
 
+## 3.处理tank静止状态
 
+思路：首先有一个变量它是否是移动状态，当按下某一个方向键的时候才能移动操作，如果没有按下就不用移动。
+
+1.定义变量
+
+```java
+private boolean moving = false;
+```
+
+2.按下某一个键以后进行移动，就是move为ture
+
+```java
+private void setMainTankDir() {
+    		//如果没有按下任何键就不动否则就要移动
+            if (!bL && !bR && !bU && !bD) {
+                myTank.setMoving(false);
+            } else {
+                myTank.setMoving(true);
+            }
+            if (bL) myTank.setDir(Dir.LEFT);
+            if (bR) myTank.setDir(Dir.RIGHT);
+            if (bU) myTank.setDir(Dir.UP);
+            if (bD) myTank.setDir(Dir.DOWN);
+        }
+```
+
+3.在移动的地方判断这个移动状态是否为true如果为false，直接就退出去，在tank类里面增加一个移动的判断
+
+```java
+private void move() {
+        if (!this.moving) return;
+        //进行移动
+        switch (dir) {
+            case LEFT:
+                x -= speed;
+                break;
+            case RIGHT:
+                x += speed;
+                break;
+            case UP:
+                y -= speed;
+                break;
+            case DOWN:
+                y += speed;
+                break;
+        }
+    }
+```
 
 
 
