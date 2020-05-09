@@ -3,7 +3,7 @@
 
 [new出一个窗](https://github.com/sanzhixiong19860117/Tank/blob/master/day01/day01.md)
 
-## 第二天学习
+## [第二天学习](https://github.com/sanzhixiong19860117/Tank/tree/master/day02)
 
 ## 第三天学习
 
