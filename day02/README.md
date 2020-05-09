@@ -297,6 +297,40 @@ case KeyEvent.VK_CONTROL://按下ctrl下操作开火
     }
 ```
 
+问题：每次只能出现一个子弹
+
+解决：把TankFrame的子弹类变成一个list集合
+
+5.先创建list子弹结合
+
+```java
+//子弹列表
+    List<Bullet> bullets = new ArrayList<>();
+```
+
+6.然后在paint方法中循环画出所有的子弹
+
+```java
+@Override
+    public void paint(Graphics graphics) {
+        myTank.paint(graphics);
+
+        //循环出所有的子弹
+        for (Bullet b:bullets){
+            b.paint(graphics);
+        }
+    }
+```
+
+7.在开火方法中进行添加新的子弹就好
+
+```java
+//开火
+    public void fire() {
+        this.tf.bullets.add(new Bullet(this.x, this.y, this.dir));
+    }
+```
+
 
 
 ## 

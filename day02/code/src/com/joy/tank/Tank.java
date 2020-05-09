@@ -53,7 +53,7 @@ public class Tank {
 
     //开火
     public void fire() {
-        this.tf.tankBullet = new Bullet(this.x, this.y, this.dir);
+        this.tf.bullets.add(new Bullet(this.x, this.y, this.dir));
     }
 
     public int getX() {

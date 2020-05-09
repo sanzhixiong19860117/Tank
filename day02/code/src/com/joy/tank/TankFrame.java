@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author joy
@@ -16,8 +18,10 @@ public class TankFrame extends Frame {
     //tank类
     private Tank myTank = new Tank(200, 200, Dir.DOWN,this);
 
-    //子弹类
-    public Bullet tankBullet = new Bullet(300, 300, Dir.DOWN);
+    //子弹列表
+    List<Bullet> bullets = new ArrayList<>();
+//    //子弹类
+//    public Bullet tankBullet = new Bullet(300, 300, Dir.DOWN);
 
     //宽度高度的常量
     private static final int GAME_WIDTH = 800;
@@ -59,7 +63,11 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics graphics) {
         myTank.paint(graphics);
-        tankBullet.paint(graphics);
+
+        //循环出所有的子弹
+        for (Bullet b:bullets){
+            b.paint(graphics);
+        }
     }
 
     //键盘监听处理类
