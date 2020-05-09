@@ -240,6 +240,63 @@ public class Bullet {
 }
 ```
 
+## 5.用双缓冲解决闪烁
+
+```java
+//双缓冲操作
+    Image offScreenImage = null;
+
+    @Override
+    public void update(Graphics g) {
+        if (null == offScreenImage) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }//定义一个屏幕外的图像
+        Graphics gBkImg = offScreenImage.getGraphics();//获取屏幕外的图像的画笔
+        gBkImg.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);//清空屏幕外的图像
+        this.paint(gBkImg);   //将图像画到屏幕外的图像上
+        g.drawImage(offScreenImage, 0, 0, GAME_WIDTH, GAME_HEIGHT, this);//将屏幕外的图像画到屏幕上
+    }
+```
+
+只需要在tankFrame类增加这个更新方法就好了。
+
+## 6.按下键盘发射子弹
+
+1.获得桌面对应的引用
+
+```java
+private Tank myTank = new Tank(200, 200, Dir.DOWN,this);//这个地方的
+//this是指TankFrame这个对象
+```
+
+2.在构造函数当中加入对应的参数
+
+```java
+private TankFrame tf = null;//增加了桌面的对象引用
+public Tank(int x, int y, Dir dir, TankFrame tf) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+        this.tf = tf;
+    }
+```
+
+3.在按下ctrl下tank发射子弹的方法
+
+```java
+case KeyEvent.VK_CONTROL://按下ctrl下操作开火
+                    myTank.fire();
+```
+
+4.在tank类中写一个方法开火方法
+
+```java
+//开火
+    public void fire() {
+        this.tf.tankBullet = new Bullet(this.x, this.y, this.dir);
+    }
+```
+
 
 
 ## 

@@ -14,16 +14,20 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     //tank类
-    private Tank myTank = new Tank(200, 200, Dir.DOWN);
+    private Tank myTank = new Tank(200, 200, Dir.DOWN,this);
 
     //子弹类
-    private Bullet tankBullet = new Bullet(300, 300, Dir.DOWN);
+    public Bullet tankBullet = new Bullet(300, 300, Dir.DOWN);
+
+    //宽度高度的常量
+    private static final int GAME_WIDTH = 800;
+    private static final int GAME_HEIGHT = 600;
 
     public TankFrame() {
         setVisible(true);                 //是否显示
         setTitle("tank wark");            //设置title
         setResizable(false);              //是否改变大小
-        setSize(800, 600); //设置高度和宽度
+        setSize(GAME_WIDTH, GAME_HEIGHT); //设置高度和宽度
 
         //键盘监听
         this.addKeyListener(new MyKeyListener());
@@ -35,6 +39,20 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+    }
+
+    //双缓冲操作
+    Image offScreenImage = null;
+
+    @Override
+    public void update(Graphics g) {
+        if (null == offScreenImage) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }//定义一个屏幕外的图像
+        Graphics gBkImg = offScreenImage.getGraphics();//获取屏幕外的图像的画笔
+        gBkImg.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);//清空屏幕外的图像
+        this.paint(gBkImg);   //将图像画到屏幕外的图像上
+        g.drawImage(offScreenImage, 0, 0, GAME_WIDTH, GAME_HEIGHT, this);//将屏幕外的图像画到屏幕上
     }
 
     //窗口重新绘制的时候操作
@@ -93,6 +111,9 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     bD = false;
                     break;
+                case KeyEvent.VK_CONTROL:
+                    myTank.fire();
+                    break;
                 default:
                     break;
             }
@@ -103,6 +124,7 @@ public class TankFrame extends Frame {
             if (!bL && !bR && !bU && !bD) {
                 myTank.setMoving(false);
             } else {
+                System.out.println("有移动");
                 myTank.setMoving(true);
             }
             if (bL) myTank.setDir(Dir.LEFT);

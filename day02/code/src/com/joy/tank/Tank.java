@@ -11,20 +11,24 @@ public class Tank {
     private int x;
     private int y;
     //移动的速度
-    private static final int speed = 5;//速度
+    private static final int speed = 10;//速度
     //初始化方向
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
+    private TankFrame tf = null;
 
-
-    public Tank(int x, int y, Dir dir) {
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void paint(Graphics graphics) {
+        Color c = graphics.getColor();
+        graphics.setColor(Color.yellow);
         graphics.fillRect(x, y, 50, 50);
+        graphics.setColor(c);
         this.move();
     }
 
@@ -45,6 +49,11 @@ public class Tank {
                 y += speed;
                 break;
         }
+    }
+
+    //开火
+    public void fire() {
+        this.tf.tankBullet = new Bullet(this.x, this.y, this.dir);
     }
 
     public int getX() {

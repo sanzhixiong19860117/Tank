@@ -23,8 +23,8 @@ public class Bullet {
 
     public void paint(Graphics graphics) {
         Color c = graphics.getColor();
-        graphics.fillOval(x, y, Width, Height);
         graphics.setColor(Color.RED);
+        graphics.fillOval(x, y, Width, Height);
         this.move();
     }
 
