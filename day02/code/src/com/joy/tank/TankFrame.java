@@ -14,6 +14,10 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
     int x = 200;
     int y = 200;
+    //移动的速度
+    private static final int speed = 10;//速度
+    //初始化方向
+    Dir dir = Dir.DOWN;
 
     public TankFrame() {
         setVisible(true);                 //是否显示
@@ -40,6 +44,21 @@ public class TankFrame extends Frame {
         //运动就是x或者y的数值进行赋值
 //        x += 10;
 //        y += 10;
+        //进行移动
+        switch (dir) {
+            case LEFT:
+                x -= speed;
+                break;
+            case RIGHT:
+                x += speed;
+                break;
+            case UP:
+                y -= speed;
+                break;
+            case DOWN:
+                y += speed;
+                break;
+        }
     }
 
     //键盘监听处理类
@@ -52,6 +71,7 @@ public class TankFrame extends Frame {
         boolean bU = false;
         boolean bR = false;
         boolean bD = false;
+
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();//使用code或者对应的数据
@@ -71,7 +91,7 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-
+            setMainTankDir();
         }
 
         @Override
@@ -93,6 +113,14 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+            setMainTankDir();
+        }
+
+        private void setMainTankDir() {
+            if (bL) dir = Dir.LEFT;
+            if (bR) dir = Dir.RIGHT;
+            if (bU) dir = Dir.UP;
+            if (bD) dir = Dir.DOWN;
         }
     }
 }
