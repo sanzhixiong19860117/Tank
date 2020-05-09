@@ -13,7 +13,11 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+    //tank类
     private Tank myTank = new Tank(200, 200, Dir.DOWN);
+
+    //子弹类
+    private Bullet tankBullet = new Bullet(300, 300, Dir.DOWN);
 
     public TankFrame() {
         setVisible(true);                 //是否显示
@@ -37,6 +41,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics graphics) {
         myTank.paint(graphics);
+        tankBullet.paint(graphics);
     }
 
     //键盘监听处理类

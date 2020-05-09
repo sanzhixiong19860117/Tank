@@ -11,7 +11,7 @@ public class Tank {
     private int x;
     private int y;
     //移动的速度
-    private static final int speed = 10;//速度
+    private static final int speed = 5;//速度
     //初始化方向
     private Dir dir = Dir.DOWN;
     private boolean moving = false;
